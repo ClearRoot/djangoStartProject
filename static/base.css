@@ -1,0 +1,17 @@
+.header_logo {
+    margin: 2rem 0;
+    font-family: 'Pacifico', cursive;
+}
+
+.header_buttons {
+    margin-bottom: 2rem;
+}
+
+.footer_logo {
+    margin: 1.5rem 0;
+    font-family: 'Pacifico', cursive;
+}
+
+.footer_buttons {
+    margin-top: 1.5rem;
+}
