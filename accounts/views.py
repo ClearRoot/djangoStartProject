@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from accounts.models import HelloWorld
 
 
@@ -12,10 +14,8 @@ def hello_page(request):
         new_hello_world.text = temp
         new_hello_world.save()
 
-        hello_world_list = HelloWorld.objects.all()
+        return HttpResponseRedirect(reverse('accounts:hello'))
 
-        return render(request, 'accounts/hello_world.html',
-                      context={'hello_world_list': hello_world_list})
     else:
         hello_world_list = HelloWorld.objects.all()
         return render(request, 'accounts/hello_world.html',
