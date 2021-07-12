@@ -12,8 +12,11 @@ def hello_page(request):
         new_hello_world.text = temp
         new_hello_world.save()
 
+        hello_world_list = HelloWorld.objects.all()
+
         return render(request, 'accounts/hello_world.html',
-                      context={'new_hello_world': new_hello_world})
+                      context={'hello_world_list': hello_world_list})
     else:
+        hello_world_list = HelloWorld.objects.all()
         return render(request, 'accounts/hello_world.html',
-                      context={'text': 'GET METHOD'})
+                      context={'hello_world_list': hello_world_list})
