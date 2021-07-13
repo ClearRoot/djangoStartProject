@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.urls import path
 from accounts import views
+from accounts.views import AccountCreateView
 
 app_name = 'accounts'
 
 urlpatterns = [
     path('hello/', views.hello_page, name='hello'),
+    path('create/', AccountCreateView.as_view(), name='create'),
 ]
