@@ -267,3 +267,5 @@ fabric.properties
 /db_backup.sqlite3
 media/
 staticfiles/
+
+identifier.sqlite
