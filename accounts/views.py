@@ -7,6 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
+from accounts.decorators import account_ownership_required
 from accounts.forms import AccountCreationForm
 from accounts.models import HelloWorld
 
@@ -41,8 +42,11 @@ class AccountDetailView(DetailView):
     template_name = 'accounts/detail.html'
 
 
-@method_decorator(login_required, 'get')
-@method_decorator(login_required, 'post')
+has_ownership = [login_required, account_ownership_required]
+
+
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountCreationForm
@@ -51,8 +55,8 @@ class AccountUpdateView(UpdateView):
     template_name = 'accounts/update.html'
 
 
-@method_decorator(login_required, 'get')
-@method_decorator(login_required, 'post')
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
