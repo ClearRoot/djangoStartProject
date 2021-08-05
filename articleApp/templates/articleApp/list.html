@@ -33,6 +33,8 @@
 
     <script src="{% static 'js/magicGrid.js' %}"></script>
 
+    {% include 'snippets/pagination.html' %}
+
     <div class="text-center my-5">
         <a href="{% url 'articleApp:create' %}"
            class="btn btn-dark rounded-pill material-icons">
