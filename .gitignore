@@ -269,3 +269,4 @@ media/
 staticfiles/
 
 identifier.sqlite
+/ngrok.exe
