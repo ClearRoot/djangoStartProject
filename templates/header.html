@@ -3,8 +3,16 @@
         <h1>Django Start Project</h1>
     </div>
     <div class="header_buttons">
-        <span>nav1</span>
-        <span>nav2</span>
+        <span>
+            <a href="{% url 'articleApp:list' %}">
+                Articles
+            </a>
+        </span>
+        <span>
+            <a href="{% url 'projectApp:list' %}">
+                Projects
+            </a>
+        </span>
         {% if not user.is_authenticated %}
         <span>
             <a href="{% url 'accounts:login' %}">
