@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.views.generic.list import MultipleObjectMixin
 
 from accounts.decorators import account_ownership_required
 from accounts.forms import AccountCreationForm
@@ -13,6 +14,9 @@ from accounts.models import HelloWorld
 
 
 # Create your views here.
+from articleApp.models import Article
+
+
 @login_required
 def hello_page(request):
     if request.method == 'POST':
@@ -36,10 +40,17 @@ class AccountCreateView(CreateView):
     template_name = 'accounts/create.html'
 
 
-class AccountDetailView(DetailView):
+class AccountDetailView(DetailView, MultipleObjectMixin):
     model = User
     context_object_name = 'target_user'
     template_name = 'accounts/detail.html'
+
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        article_list = Article.objects.filter(writer=self.object)
+        return super().get_context_data(object_list=article_list,
+                                        **kwargs)
 
 
 has_ownership = [login_required, account_ownership_required]
