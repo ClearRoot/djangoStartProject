@@ -8,6 +8,7 @@ from django.views.generic.list import MultipleObjectMixin
 from articleApp.models import Article
 from projectApp.forms import ProjectCreationForm
 from projectApp.models import Project
+from subscribeApp.models import Subscription
 
 
 @method_decorator(login_required, 'get')
@@ -29,8 +30,16 @@ class ProjectDetailView(DetailView, MultipleObjectMixin):
     paginate_by = 20
 
     def get_context_data(self, **kwargs):
+        user = self.request.user
+        project = self.object
+
+        if user.is_authenticated:
+            subscription = Subscription.objects.filter(user=user, project=project)
+        else:
+            subscription = None
+
         article_list = Article.objects.filter(project=self.object)
-        return super().get_context_data(object_list=article_list, **kwargs)
+        return super().get_context_data(object_list=article_list, subscription=subscription, **kwargs)
 
 
 class ProjectListView(ListView):
