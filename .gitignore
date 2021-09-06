@@ -270,3 +270,6 @@ staticfiles/
 
 identifier.sqlite
 /ngrok.exe
+/likelion.pem
+/likelion_gcp
+/likelion_gcp.pub
