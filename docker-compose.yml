@@ -10,7 +10,7 @@ services:
       - django_lesson_network
     volumes:
       - /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf
-      - lesson_static:/data/staticfiles/
+      - lesson_static:/data/static/
       - lesson_media:/data/media/
 
   django:
