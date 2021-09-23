@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+
+  nginx:
+    image: nginx:1.19.5
+    ports:
+      - 80:80
+    networks:
+      - django_main_network
+    volumes:
+      - /home/jhk7767/nginx.conf:/etc/nginx/nginx.conf
+      - main_static:/data/static/
+      - main_media:/data/media/
+
+  django:
+    image: djangomain:3
+    networks:
+      - django_main_network
+    volumes:
+      - main_static:/home/djangoStartProject/staticfiles/
+      - main_media:/home/djangoStartProject/media/
+
+networks:
+  django_main_network:
+
+volumes:
+  main_static:
+  main_media:
