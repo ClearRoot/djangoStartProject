@@ -14,12 +14,24 @@ services:
       - main_media:/data/media/
 
   django:
-    image: djangomain:3
+    image: djangomain:4
     networks:
       - django_main_network
     volumes:
       - main_static:/home/djangoStartProject/staticfiles/
       - main_media:/home/djangoStartProject/media/
+
+  mariadb:
+    image: mariadb:10.5
+    networks:
+      - django_main_network
+    volumes:
+      - main_mariadb:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: password1234
+      MARIADB_DATABASE: django
+      MARIADB_USER: django
+      MARIADB_PASSWORD: password1234
 
 networks:
   django_main_network:
@@ -27,3 +39,4 @@ networks:
 volumes:
   main_static:
   main_media:
+  main_mariadb:
