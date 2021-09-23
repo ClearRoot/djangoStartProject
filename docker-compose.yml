@@ -14,12 +14,24 @@ services:
       - lesson_media:/data/media/
 
   django:
-    image: django_lesson:3
+    image: django_lesson:4
     networks:
       - django_lesson_network
     volumes:
       - lesson_static:/home/djangoStartProject/staticfiles/
       - lesson_media:/home/djangoStartProject/media/
+
+  mariadb:
+    image: mariadb:10.5
+    networks:
+      - django_lesson_network
+    volumes:
+      - lesson_mariadb:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: password1234
+      MARIADB_DATABASE: django
+      MARIADB_USER: django
+      MARIADB_PASSWORD: password1234
 
 networks:
   django_lesson_network:
@@ -27,3 +39,4 @@ networks:
 volumes:
   lesson_static:
   lesson_media:
+  lesson_mariadb:
