@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+
+  nginx:
+    image: nginx:1.19.5
+    ports:
+      - 80:80
+    networks:
+      - django_lesson_network
+    volumes:
+      - /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf
+      - lesson_static:/data/staticfiles/
+      - lesson_media:/data/media/
+
+  django:
+    image: django_lesson:3
+    networks:
+      - django_lesson_network
+    volumes:
+      - lesson_static:/home/djangoStartProject/staticfiles/
+      - lesson_media:/home/djangoStartProject/media/
+
+networks:
+  django_lesson_network:
+
+volumes:
+  lesson_static:
+  lesson_media:
