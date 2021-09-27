@@ -14,7 +14,7 @@ services:
       - lesson_media:/data/media/
 
   django:
-    image: django_lesson:4
+    image: django_lesson:5
     networks:
       - django_lesson_network
     volumes:
